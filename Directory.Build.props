@@ -44,7 +44,7 @@
     <PackageVersion Condition="'$(IncludePreReleaseLabelInPackageVersion)' == 'true'">$(PackageVersion)-$(VersionSuffix)</PackageVersion>
 
     <PackageReleaseNotes>
-      See release notes at https://github.com/natemcmaster/LettuceEncrypt/releases/tag/v$(PackageVersion).
+      See release notes at https://github.com/ArchonSystemsInc/LettuceEncrypt-Archon/releases/tag/v$(PackageVersion).
     </PackageReleaseNotes>
   </PropertyGroup>
 

@@ -14,17 +14,12 @@ LettuceEncrypt-Archon for ASP.NET Core
 [ACME]: https://en.wikipedia.org/wiki/Automated_Certificate_Management_Environment
 [Let's Encrypt]: https://letsencrypt.org/
 
-LettuceEncrypt provides API for ASP.NET Core projects to integrate with a certificate authority (CA), such as
+LettuceEncrypt-Archon provides API for ASP.NET Core projects to integrate with a certificate authority (CA), such as
 [Let's Encrypt], for free, automatic HTTPS (SSL/TLS) certificates using the [ACME] protocol.
 
 When enabled, your web server will **automatically** generate an HTTPS certificate during start up.
 It then configures Kestrel to use this certificate for all HTTPS traffic.
 See [usage instructions below](#usage) to get started.
-
-Created and developed by [@natemcmaster](https://github.com/natemcmaster) with ❤️ from Seattle ☕️.
-This project was formerly known as "McMaster.AspNetCore.LetsEncrypt", but [has been renamed for
-trademark reasons](https://github.com/natemcmaster/LettuceEncrypt/issues/99). This project is **not an official
-offering** from Let's Encrypt® or ISRG™.
 
 This project is 100% organic and best served cold with ranch and carrots. 🥬
 
