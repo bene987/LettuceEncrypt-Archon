@@ -15,7 +15,7 @@ namespace LettuceEncrypt
         /// </summary>
         /// <param name="token"></param>
         /// <param name="response"></param>
-        public void AddChallengeResponse(string token, string response);
+        void AddChallengeResponse(string token, string response);
 
         /// <summary>
         ///
@@ -23,6 +23,6 @@ namespace LettuceEncrypt
         /// <param name="token"></param>
         /// <param name="value"></param>
         /// <returns></returns>
-        public bool TryGetResponse(string token, [MaybeNullWhen(false)] out string? value);
+        bool TryGetResponse(string token, [MaybeNullWhen(false)] out string? value);
     }
 }

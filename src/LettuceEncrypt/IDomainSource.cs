@@ -23,7 +23,7 @@ namespace LettuceEncrypt
     {   /// <summary>
         /// Domains the cert should be requested for
         /// </summary>
-        public ISet<string> Domains { get; }
+        ISet<string> Domains { get; }
     }
 
     /// <summary>

@@ -13,12 +13,12 @@ internal interface IFailedOrderStore
     /// </summary>
     /// <param name="domains"></param>
     /// <param name="expires"></param>
-    public void AddOrder(ISet<string> domains, DateTimeOffset expires);
+    void AddOrder(ISet<string> domains, DateTimeOffset expires);
 
     /// <summary>
     ///
     /// </summary>
     /// <param name="domains"></param>
     /// <returns></returns>
-    public DateTimeOffset? GetOrder(ISet<string> domains);
+    DateTimeOffset? GetOrder(ISet<string> domains);
 }

@@ -11,6 +11,6 @@ namespace LettuceEncrypt
         /// <summary>
         /// Determine if the ACME service is running
         /// </summary>
-        public bool IsRunning { get; }
+        bool IsRunning { get; }
     }
 }
