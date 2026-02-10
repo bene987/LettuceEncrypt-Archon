@@ -1,27 +1,20 @@
 ﻿// Copyright (c) Nate McMaster & Archon Systems Inc.
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
-using System.Text;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Configure LettuceEncrypt, adding required services to the DI container
-builder.Services.AddLettuceEncrypt(o =>
-{
-    if (o.UseStagingServer)
-    {
-        o.AdditionalIssuers = Directory.GetFiles("Testing", "*.pem")
-            .Select(File.ReadAllBytes)
-            .Select(pem => Encoding.UTF8.GetString(pem))
-            .ToArray();
-    }
-});
-
-builder.WebHost.PreferHostingUrls(false);
+builder.Services.AddLettuceEncrypt();
 builder.WebHost.UseKestrel(k =>
 {
-    // Configure Kestrel to use LettuceEncrypt for HTTPS for this endpoint
-    k.ListenAnyIP(443, o => o.UseLettuceEncrypt(k.ApplicationServices));
+    k.ListenAnyIP(443, o =>
+    {
+        // Configure Kestrel to use LettuceEncrypt for HTTPS for this endpoint
+        o.UseLettuceEncrypt(k.ApplicationServices);
+
+        // Optionally enable HTTP/3
+        o.Protocols = Microsoft.AspNetCore.Server.Kestrel.Core.HttpProtocols.Http1AndHttp2AndHttp3;
+    });
 });
 
 var app = builder.Build();
