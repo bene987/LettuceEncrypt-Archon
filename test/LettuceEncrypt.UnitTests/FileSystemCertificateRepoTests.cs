@@ -22,7 +22,7 @@ public class FileSystemCertificateRepoTests
     [InlineData("")]
     public async Task ItCanSaveCertsWithoutPassword(string? password)
     {
-        if (password == null && RuntimeInformation.IsOSPlatform(OSPlatform.OSX) && RuntimeInformation.FrameworkDescription.StartsWith(".NET 8", StringComparison.OrdinalIgnoreCase))
+        if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX) && RuntimeInformation.FrameworkDescription.StartsWith(".NET 8", StringComparison.OrdinalIgnoreCase))
         {
             // MacOS on net8.0 doesn't support null password
             // https://github.com/dotnet/runtime/issues/23635
