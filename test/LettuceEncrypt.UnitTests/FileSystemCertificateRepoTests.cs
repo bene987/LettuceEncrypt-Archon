@@ -2,9 +2,9 @@
 // Licensed under the Apache License, Version 2.0. See License.txt in the project root for license information.
 
 #nullable enable
-using System.Runtime.InteropServices;
 using System.Security.Cryptography.X509Certificates;
 using LettuceEncrypt.Internal;
+using McMaster.Extensions.Xunit;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Hosting.Internal;
@@ -17,17 +17,17 @@ using static TestUtils;
 public class FileSystemCertificateRepoTests
 {
     [Theory]
+    [InlineData(null)]
     [InlineData("")]
-    public async Task ItCanSaveCertsWithoutPassword(string password)
+    public async Task ItCanSaveCertsWithoutPassword(string? password)
     {
         var dir = new DirectoryInfo(Path.Combine(AppContext.BaseDirectory, Path.GetRandomFileName()));
         var repo = new FileSystemCertificateRepository(dir, password);
         var cert = CreateTestCert("localhost");
-        var expectedFile = Path.Combine(dir.FullName, "certs", cert.Thumbprint + ".pfx");
         await repo.SaveAsync(cert, default);
 
-        var readCert = X509CertificateLoader.LoadPkcs12FromFile(expectedFile, "",
-            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? X509KeyStorageFlags.DefaultKeySet : X509KeyStorageFlags.EphemeralKeySet);
+        var certs = await repo.GetCertificatesAsync(default);
+        var readCert = Assert.Single(certs);
         Assert.Equal(cert.GetCertHashString(), readCert.GetCertHashString());
     }
 
@@ -49,7 +49,7 @@ public class FileSystemCertificateRepoTests
     }
 
     [Theory]
-    [InlineData("")]
+    [InlineData(null)]
     [InlineData("testpassword")]
     public async Task ItRoundTripsCert(string? password)
     {
