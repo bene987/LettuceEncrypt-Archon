@@ -42,7 +42,7 @@ public class TestUtils
             {
                 // https://github.com/dotnet/runtime/issues/29144
                 var certWithKey = cert.Export(X509ContentType.Pfx);
-                return new X509Certificate2(certWithKey, "", X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
+                return X509CertificateLoader.LoadPkcs12(certWithKey, "", X509KeyStorageFlags.PersistKeySet | X509KeyStorageFlags.Exportable);
             }
             catch
             {
