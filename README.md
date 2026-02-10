@@ -50,18 +50,18 @@ See ["Securing An Azure App Service with Let's Encrypt"](https://www.hanselman.c
 
 Install this package into your project using NuGet ([see details here][nuget-url]).
 
-The primary API usage is to call `IServiceCollection.AddLettuceEncrypt` in the `Startup` class `ConfigureServices` method.
+The primary API usage is to call `IServiceCollection.AddLettuceEncrypt`, and then call `UseLettuceEncrypt` on the Kestrel endpoint.
 
 ```csharp
-using Microsoft.Extensions.DependencyInjection;
+var builder = WebApplication.CreateBuilder(args);
 
-public class Startup
+// Configure LettuceEncrypt, adding required services to the DI container
+builder.Services.AddLettuceEncrypt();
+builder.WebHost.UseKestrel(k =>
 {
-    public void ConfigureServices(IServiceCollection services)
-    {
-        services.AddLettuceEncrypt()
-    }
-}
+    // Configure Kestrel to use LettuceEncrypt for HTTPS for this endpoint
+    k.ListenAnyIP(443, o => o.UseLettuceEncrypt(k.ApplicationServices));
+});
 ```
 
 A few required options should be set, typically via the appsettings.json file.
@@ -142,7 +142,7 @@ Example TBD
 
 ### Kestrel configuration
 
-If your 
+If your
 is using the `.UseKestrel()` method to configure IP addresses, ports, or HTTPS settings,
 you will also need to call `UseLettuceEncrypt`. This is required to make Lettuce Encrypt work.
 
