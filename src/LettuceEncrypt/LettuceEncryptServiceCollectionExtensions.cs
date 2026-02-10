@@ -40,8 +40,6 @@ public static class LettuceEncryptServiceCollectionExtensions
     public static ILettuceEncryptServiceBuilder AddLettuceEncrypt(this IServiceCollection services,
         Action<LettuceEncryptOptions> configure, bool includeAcmeServices = true)
     {
-        services.AddTransient<IConfigureOptions<KestrelServerOptions>, KestrelOptionsSetup>();
-
         services.TryAddSingleton<ICertificateAuthorityConfiguration, DefaultCertificateAuthorityConfiguration>();
 
         services

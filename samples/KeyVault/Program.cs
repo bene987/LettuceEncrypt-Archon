@@ -15,5 +15,9 @@ public class Program
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();
+                webBuilder.ConfigureKestrel(k =>
+                {
+                    k.ListenAnyIP(443, listenOpts => listenOpts.UseLettuceEncrypt(k.ApplicationServices));
+                });
             });
 }

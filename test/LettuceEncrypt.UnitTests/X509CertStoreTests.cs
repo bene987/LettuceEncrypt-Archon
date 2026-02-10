@@ -39,7 +39,8 @@ public class X509CertStoreTests : IDisposable
         "On Windows in CI, adding certs to store doesn't work for unclear reasons.")]
     public async Task ItFindsCertByCommonNameAsync()
     {
-        var commonName = "x509store.read.test.natemcmaster.com";
+        var commonName = $"x509store.read.test.natemcmaster.{Environment.Version}.com";
+
         _options.DomainNames = new[] { commonName };
         using var x509Store = new X509Store(StoreName.My, StoreLocation.CurrentUser);
         x509Store.Open(OpenFlags.ReadWrite);

@@ -74,7 +74,6 @@ LettuceEncrypt.LettuceEncryptOptions.UseStagingServer.set -> void
 Microsoft.AspNetCore.Hosting.LettuceEncryptKestrelHttpsOptionsExtensions
 Microsoft.Extensions.DependencyInjection.LettuceEncryptServiceCollectionExtensions
 static LettuceEncrypt.FileSystemStorageExtensions.PersistDataToDirectory(this LettuceEncrypt.ILettuceEncryptServiceBuilder! builder, System.IO.DirectoryInfo! directory, string? pfxPassword) -> LettuceEncrypt.ILettuceEncryptServiceBuilder!
-static Microsoft.AspNetCore.Hosting.LettuceEncryptKestrelHttpsOptionsExtensions.UseLettuceEncrypt(this Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions! httpsOptions, System.IServiceProvider! applicationServices) -> Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions!
 static Microsoft.Extensions.DependencyInjection.LettuceEncryptServiceCollectionExtensions.AddLettuceEncrypt(this Microsoft.Extensions.DependencyInjection.IServiceCollection! services) -> LettuceEncrypt.ILettuceEncryptServiceBuilder!
 LettuceEncrypt.IAcmeCertificateLoader
 LettuceEncrypt.IAcmeCertificateLoader.IsRunning.get -> bool
