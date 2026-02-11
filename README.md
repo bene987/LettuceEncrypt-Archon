@@ -138,53 +138,6 @@ To solve for this you can implement `IRuntimeCertificateStore` in a way that wil
 
 Example TBD
 
-## Additional options
-
-### Kestrel configuration
-
-If your
-is using the `.UseKestrel()` method to configure IP addresses, ports, or HTTPS settings,
-you will also need to call `UseLettuceEncrypt`. This is required to make Lettuce Encrypt work.
-
-#### Example: ConfigureHttpsDefaults
-
-If calling `ConfigureHttpsDefaults`, use `UseLettuceEncrypt` like this:
-
-```c#
-webBuilder.UseKestrel(k =>
-{
-    var appServices = k.ApplicationServices;
-    k.ConfigureHttpsDefaults(h =>
-    {
-        h.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-        h.UseLettuceEncrypt(appServices);
-    });
-});
-```
-
-#### Example: Listen + UseHttps
-If using `Listen` + `UseHttps` to manually configure Kestrel's address binding, use `UseLettuceEncrypt` like this:
-
-```c#
-webBuilder.UseKestrel(k =>
-{
-    var appServices = k.ApplicationServices;
-    k.ListenAnyIP(443,
-        o => o.UseHttps(h =>
-        {
-            h.UseLettuceEncrypt(appServices);
-        }));
-});
-```
-
-#### Example: Net6+ Listen (TlsHandshakeCallbackOptions Support)
-```c#
-webBuilder.UseKestrel(k =>
-{
-    k.ListenAnyIP(443, l => l.UseLettuceEncrypt(k.ApplicationServices));
-});
-```
-
 ### Customizing storage
 
 Certificates are stored to the machine's X.509 store by default. Certificates can be stored in additional
